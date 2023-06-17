@@ -18,12 +18,8 @@ public class StatementTests
 
         var lines = new Statement(transactions).GetLines();
 
-        var duplicatedFields = lines
-            .Select(line => (line.Date, line.Description, line.Amount))
-            .ToArray();
-        
-        duplicatedFields.ShouldContain((new DateOnly(2022, 01, 01), "Salary", 1000m));
-        duplicatedFields.ShouldContain((new DateOnly(2022, 01, 02), "Sainsburys", -80.5m));
+        lines.ShouldContain(new StatementLine(new DateOnly(2022, 01, 01), "Salary", 1000m));
+        lines.ShouldContain(new StatementLine(new DateOnly(2022, 01, 02), "Sainsburys", -80.5m));
     }
 
     // [Test]
