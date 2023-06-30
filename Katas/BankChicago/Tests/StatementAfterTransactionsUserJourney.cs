@@ -12,34 +12,45 @@ public class StatementAfterTransactionsUserJourney
             .Withdraw(49.50m);
 
         //This seems very brittle, will have to improve that
-        var statement = testSystem.GetStatementText().ToArray();
-        statement[0].ShouldBe(" Date       | Credit  |   Debit |  Balance");
-        statement[1].ShouldBe(" 29/06/2022 |   1,000 |         | 100");
-        statement[2].ShouldBe(" 30/06/2022 |         |   49.50 |  50.50");
+        var statement = testSystem.GetStatementText();
+        statement[0].ShouldBe(" Date       |  Credit |   Debit |  Balance");
+        statement[1].ShouldBe(" 29/06/2022 |   1,000 |         |   100.00");
+        statement[2].ShouldBe(" 30/06/2022 |         |   49.50 |    50.50");
         statement[3].ShouldBe("");
         statement[4].ShouldBe("Closing Balance: 50.50");
     }
 
     class TestSystem
     {
+        readonly Account _account = new();
+        DateOnly _systemDate = DateOnly.MinValue;
+        
         public TestSystem SetDate(DateOnly systemDate)
         {
+            _systemDate = systemDate;
             return this;
         }
         
         public TestSystem Deposit(decimal amount)
         {
+            //TODO: logic in test code
+            _account.MakeTransaction(new Transaction(_systemDate, "Deposit", amount));
             return this;
         }
 
         public TestSystem Withdraw(decimal amount)
         {
+            //TODO: logic in test code
+            _account.MakeTransaction(new Transaction(_systemDate, "Withdrawal", -amount));
             return this;
         }
 
-        public IEnumerable<string> GetStatementText()
+        public IReadOnlyList<string> GetStatementText()
         {
-            yield break;
+            var statement = _account.GetStatement();
+            
+            //TODO: need way to format a statement
+            return Array.Empty<string>();
         }
     }
 }
