@@ -1,6 +1,6 @@
 ﻿namespace Katas.BankChicago.Tests;
 
-public class StatementAfterTransactionsUserJourney
+class StatementAfterTransactionsUserJourney
 {
     [Test, Explicit("User journey not complete yet")]
     public void VerifyStatementAfterDepositAndWithdrawal()

@@ -1,6 +1,6 @@
 namespace Katas.BankChicago.Tests;
 
-public abstract class GettingAStatement
+abstract class GettingAStatement
 {
     class WithNoTransactions : GettingAStatement
     {
