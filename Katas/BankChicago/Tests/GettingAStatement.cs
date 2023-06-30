@@ -4,11 +4,18 @@ abstract class GettingAStatement
 {
     class WithNoTransactions : GettingAStatement
     {
+        readonly Statement _statement = new StatementBuilder().Build();
+
         [Test]
         public void ShouldHaveNoLines()
         {
-            var statementLines = GetStatementLinesForTransactions();
-            statementLines.ShouldBeEmpty();
+            _statement.GetLines().ShouldBeEmpty();
+        }
+
+        [Test]
+        public void ShouldHaveZeroClosingBalance()
+        {
+            _statement.ClosingBalance.ShouldBe(0m);
         }
     }
 
@@ -28,14 +35,28 @@ abstract class GettingAStatement
                 new StatementLine(new DateOnly(2022, 01, 02), "Sainsburys", -80.5m, 0)
             );
         }
+        
+        [Test]
+        public void ShouldHaveClosingBalance()
+        {
+            //TODO: need a builder for transactions
+            var statement = new StatementBuilder()
+                .WithTransactions(
+                    new TransactionBuilder{ Amount = 1000 }.Build(),
+                    new TransactionBuilder{ Amount = 50.12m }.Build()
+                )
+                .Build();
+            statement.ClosingBalance.ShouldBe(1050.12m);
+        }
+        
 
         [Test]
         public void ShouldHaveLinesWithNewestFirst()
         {
             var outOfOrderTransactions = new[]
             {
-                new Transaction(new DateOnly(2022, 01, 01), "Older", 0),
-                new Transaction(new DateOnly(2022, 01, 02), "Newer", 0)
+                new TransactionBuilder{ Date = new DateOnly(2022, 01, 01) }.Build(),
+                new TransactionBuilder{ Date = new DateOnly(2022, 01, 02) }.Build()
             };
             var lines = GetStatementLinesForTransactions(outOfOrderTransactions);
 

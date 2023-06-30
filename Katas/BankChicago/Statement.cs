@@ -2,17 +2,19 @@ namespace Katas.BankChicago;
 
 public class Statement
 {
-    readonly IEnumerable<Transaction> _transactions;
+    readonly IReadOnlyList<StatementLine> _statementLines;
 
-    public Statement(IEnumerable<Transaction> transactions)
+    Statement(IReadOnlyList<StatementLine> statementLines, decimal closingBalance)
     {
-        _transactions = transactions;
+        _statementLines = statementLines;
+        ClosingBalance = closingBalance;
     }
 
-    public IReadOnlyList<StatementLine> GetLines()
+    public static Statement BuildFromTransactions(IEnumerable<Transaction> transactions)
     {
         var balance = 0m;
-        return _transactions.Select(trans => new StatementLine(
+        var statementLines = transactions
+            .Select(trans => new StatementLine(
                 trans.TransactionDate,
                 trans.Description,
                 trans.Amount,
@@ -20,5 +22,15 @@ public class Statement
             ))
             .OrderByDescending(sl => sl.Date)
             .ToArray();
+        var closingBalance = balance;
+        
+        return new Statement(statementLines, closingBalance);
+    }
+
+    public decimal ClosingBalance { get; }
+
+    public IReadOnlyList<StatementLine> GetLines()
+    {
+        return _statementLines;
     }
 }

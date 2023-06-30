@@ -2,13 +2,17 @@
 
 static class TextStatementFormat
 {
-    public static string[] Format(Statement statement)
+    public static IReadOnlyList<string> Format(Statement statement)
     {
-        return new[]
+        var statementLines = statement.GetLines();
+        var outputLines = new List<string>();
+        outputLines.Add("Date | Deposit | Withdrawal | Amount");
+        foreach (var statementLine in statementLines)
         {
-            "Date | Deposit | Withdrawal | Amount",
-            "",
-            "Closing Balance: 0.00"
-        };
+            outputLines.Add("");
+        }
+        outputLines.Add("");
+        outputLines.Add("Closing Balance: 0.00");
+        return outputLines;
     }
 }

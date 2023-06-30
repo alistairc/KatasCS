@@ -11,6 +11,6 @@ public class Account
 
     public Statement GetStatement()
     {
-        return new Statement(_transactions);
+        return Statement.BuildFromTransactions(_transactions);
     } 
 }
