@@ -11,13 +11,13 @@ public class Statement
 
     public IReadOnlyList<StatementLine> GetLines()
     {
-        return _transactions.Select(
-                trans => new StatementLine(
-                    trans.TransactionDate,
-                    trans.Description,
-                    trans.Amount
-                )
-            )
+        var balance = 0m;
+        return _transactions.Select(trans => new StatementLine(
+                trans.TransactionDate,
+                trans.Description,
+                trans.Amount,
+                balance += trans.Amount
+            ))
             .OrderByDescending(sl => sl.Date)
             .ToArray();
     }
