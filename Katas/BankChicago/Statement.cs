@@ -18,6 +18,7 @@ public class Statement
                     trans.Amount
                 )
             )
+            .OrderByDescending(sl => sl.Date)
             .ToArray();
     }
 }

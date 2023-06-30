@@ -22,18 +22,18 @@ public class StatementTests
         lines.ShouldContain(new StatementLine(new DateOnly(2022, 01, 02), "Sainsburys", -80.5m));
     }
 
-    // [Test]
-    // public void WithTransactions_ShouldHaveLinesWithNewestFirst()
-    // {
-    //     var outOfOrderTransactions = new[]
-    //     {
-    //         new Transaction(new DateOnly(2022,01,01)),
-    //         new Transaction(new DateOnly(2022,01,02))
-    //     };
-    //     var statement = new Statement(outOfOrderTransactions);
-    //
-    //     statement.GetLines()
-    //         .Select(line => line.Date)
-    //         .ShouldBeInOrder(SortDirection.Descending);
-    // }
+    [Test]
+    public void WithTransactions_ShouldHaveLinesWithNewestFirst()
+    {
+        var outOfOrderTransactions = new[]
+        {
+            new Transaction(new DateOnly(2022,01,01), "Older", 0),
+            new Transaction(new DateOnly(2022,01,02), "Newer", 0)
+        };
+        var statement = new Statement(outOfOrderTransactions);
+    
+        statement.GetLines()
+            .Select(line => line.Date)
+            .ShouldBeInOrder(SortDirection.Descending);
+    }
 }
