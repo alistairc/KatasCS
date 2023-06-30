@@ -57,8 +57,12 @@ public abstract class GettingAStatement
     
     static IReadOnlyList<StatementLine> GetStatementLinesForTransactions(params Transaction[] transactions)
     {
-        var statement = new Statement(transactions);
-        var statementLines = statement.GetLines();
-        return statementLines;
+        var account = new Account();
+        foreach (var transaction in transactions)
+        {
+            account.MakeTransaction(transaction);
+        }
+        var statement = account.GetStatement();
+        return statement.GetLines();
     }
 }
