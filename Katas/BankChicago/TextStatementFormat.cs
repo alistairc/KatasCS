@@ -12,7 +12,7 @@ static class TextStatementFormat
             outputLines.Add("");
         }
         outputLines.Add("");
-        outputLines.Add("Closing Balance: 0.00");
+        outputLines.Add($"Closing Balance: {statement.ClosingBalance:N2}");
         return outputLines;
     }
 }

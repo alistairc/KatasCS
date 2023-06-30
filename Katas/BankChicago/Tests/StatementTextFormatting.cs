@@ -21,8 +21,8 @@ class StatementTextFormatting
     {
         var statement = new StatementBuilder()
             .WithTransactions(
-                new Transaction(new DateOnly(2022, 1, 1), "Deposit 1", 1234m),
-                new Transaction(new DateOnly(2022, 1, 1), "Deposit 2", 1234m)
+                new TransactionBuilder().Build(),
+                new TransactionBuilder().Build()
             )
             .Build();
         var lines = TextStatementFormat.Format(statement);
@@ -37,19 +37,18 @@ class StatementTextFormatting
         lines[^1].ShouldStartWith("Closing Balance: ");
     }
 
-    // [Test]
-    // public void ShouldIncludeTheClosingBalance()
-    // {
-    //     var statement = new StatementBuilder()
-    //         .WithTransactions(
-    //             new Transaction(new DateOnly(2022, 1, 1), "Deposit 1", 1234m),
-    //             new Transaction(new DateOnly(2022, 1, 1), "Deposit 2", 1234m)
-    //         )
-    //         .Build();
-    //     var lines = TextStatementFormat.Format(statement);
-    //     lines[^1].ShouldBe($"Closing Balance: {statement.ClosingBalance}");
-    // }
-
+    [Test]
+    public void ShouldIncludeTheClosingBalance()
+    {
+        var statement = new StatementBuilder()
+            .WithTransactions(
+                new TransactionBuilder { Amount = 1000}.Build(),
+                new TransactionBuilder { Amount = 1.2m }.Build()
+            )
+            .Build();
+        var lines = TextStatementFormat.Format(statement);
+        lines[^1].ShouldBe($"Closing Balance: 1,001.20");
+    }
 
     // //TOO BIG
     // [Test]

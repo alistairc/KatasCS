@@ -39,7 +39,6 @@ abstract class GettingAStatement
         [Test]
         public void ShouldHaveClosingBalance()
         {
-            //TODO: need a builder for transactions
             var statement = new StatementBuilder()
                 .WithTransactions(
                     new TransactionBuilder{ Amount = 1000 }.Build(),
