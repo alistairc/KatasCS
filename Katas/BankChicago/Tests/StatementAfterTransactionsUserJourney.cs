@@ -7,17 +7,17 @@ class StatementAfterTransactionsUserJourney
     {
         var testSystem = new TestSystem()
             .SetDate(new DateOnly(2022, 06, 29))
-            .Deposit(100)
+            .Deposit(1000)
             .SetDate(new DateOnly(2022, 06, 30))
             .Withdraw(49.50m);
 
         //This seems very brittle, will have to improve that
         var statement = testSystem.GetStatementText();
-        statement[0].ShouldBe(" Date       |  Credit |   Debit |  Balance");
-        statement[1].ShouldBe(" 29/06/2022 |   1,000 |         |   100.00");
-        statement[2].ShouldBe(" 30/06/2022 |         |   49.50 |    50.50");
+        statement[0].ShouldBe("Date        |     Deposit |  Withdrawal |     Balance");
+        statement[1].ShouldBe("30/06/2022  |             |       49.50 |      950.50");
+        statement[2].ShouldBe("29/06/2022  |    1,000.00 |             |    1,000.00");
         statement[3].ShouldBe("");
-        statement[4].ShouldBe("Closing Balance: 50.50");
+        statement[4].ShouldBe("Closing Balance: 950.50");
     }
 
     class TestSystem
@@ -47,10 +47,8 @@ class StatementAfterTransactionsUserJourney
 
         public IReadOnlyList<string> GetStatementText()
         {
-            var statement = _account.GetStatement();
-            
-            //TODO: need way to format a statement
-            return Array.Empty<string>();
+            //TODO: logic in test code
+            return TextStatementFormat.Format(_account.GetStatement());
         }
     }
 }
