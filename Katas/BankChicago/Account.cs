@@ -12,5 +12,5 @@ public class Account
     public Statement GetStatement()
     {
         return Statement.BuildFromTransactions(_transactions);
-    } 
+    }
 }

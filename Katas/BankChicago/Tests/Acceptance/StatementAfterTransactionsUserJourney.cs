@@ -1,4 +1,6 @@
-﻿namespace Katas.BankChicago.Tests;
+﻿using Katas.BankChicago.Tests.Infrastructure;
+
+namespace Katas.BankChicago.Tests.Acceptance;
 
 class StatementAfterTransactionsUserJourney
 {
@@ -47,7 +49,7 @@ class StatementAfterTransactionsUserJourney
         {
             return GetBankAccountEndpoint().GetTextStatement();
         }
-        
+
         BankAccountEndpoint GetBankAccountEndpoint()
         {
             var endpoint = new BankAccountEndpoint(new FixedClock(_systemDate), _account);

@@ -1,9 +1,9 @@
-﻿namespace Katas.BankChicago.Tests;
+﻿using Katas.BankChicago.Tests.Infrastructure;
+
+namespace Katas.BankChicago.Tests;
 
 class StatementTextFormatting
 {
-    const int HeaderAndFooterLineCount = 3;
-    
     [Test]
     public void WithNoTransactions_ShouldBeJustTheHeaderAndFooter()
     {
@@ -21,12 +21,12 @@ class StatementTextFormatting
     {
         var statement = new StatementBuilder()
             .WithTransactions(
-                new TransactionBuilder { Amount = -1000}.Build(),
+                new TransactionBuilder { Amount = -1000 }.Build(),
                 new TransactionBuilder { Amount = -1.2m }.Build()
             )
             .Build();
         var lines = TextStatementFormat.Format(statement);
-        lines[^1].ShouldBe($"Closing Balance: -1,001.20");
+        lines[^1].ShouldBe("Closing Balance: -1,001.20");
     }
 
     [Test]
@@ -34,7 +34,7 @@ class StatementTextFormatting
     {
         // This is an Approval test.  Inevitably covers quite a bit of stuff
         // and is a bit brittle, but good for visual stuff
-        
+
         var statement = new StatementBuilder()
             .WithTransactions(
                 new Transaction(new DateOnly(2022, 1, 1), "Deposit 1", 1234m),

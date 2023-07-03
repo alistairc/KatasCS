@@ -1,7 +1,17 @@
+using Katas.BankChicago.Tests.Infrastructure;
+
 namespace Katas.BankChicago.Tests;
 
 abstract class GettingAStatement
 {
+    static IReadOnlyList<StatementLine> GetStatementLinesForTransactions(params Transaction[] transactions)
+    {
+        return new StatementBuilder()
+            .WithTransactions(transactions)
+            .Build()
+            .GetLines();
+    }
+
     class WithNoTransactions : GettingAStatement
     {
         readonly Statement _statement = new StatementBuilder().Build();
@@ -35,27 +45,27 @@ abstract class GettingAStatement
                 new StatementLine(new DateOnly(2022, 01, 02), "Sainsburys", -80.5m, 0)
             );
         }
-        
+
         [Test]
         public void ShouldHaveClosingBalance()
         {
             var statement = new StatementBuilder()
                 .WithTransactions(
-                    new TransactionBuilder{ Amount = 1000 }.Build(),
-                    new TransactionBuilder{ Amount = 50.12m }.Build()
+                    new TransactionBuilder { Amount = 1000 }.Build(),
+                    new TransactionBuilder { Amount = 50.12m }.Build()
                 )
                 .Build();
             statement.ClosingBalance.ShouldBe(1050.12m);
         }
-        
+
 
         [Test]
         public void ShouldHaveLinesWithNewestFirst()
         {
             var outOfOrderTransactions = new[]
             {
-                new TransactionBuilder{ Date = new DateOnly(2022, 01, 01) }.Build(),
-                new TransactionBuilder{ Date = new DateOnly(2022, 01, 02) }.Build()
+                new TransactionBuilder { Date = new DateOnly(2022, 01, 01) }.Build(),
+                new TransactionBuilder { Date = new DateOnly(2022, 01, 02) }.Build()
             };
             var lines = GetStatementLinesForTransactions(outOfOrderTransactions);
 
@@ -76,10 +86,4 @@ abstract class GettingAStatement
             lines[1].Balance.ShouldBe(1000m);
         }
     }
-
-    static IReadOnlyList<StatementLine> GetStatementLinesForTransactions(params Transaction[] transactions)
-        => new StatementBuilder()
-            .WithTransactions(transactions)
-            .Build()
-            .GetLines();
 }

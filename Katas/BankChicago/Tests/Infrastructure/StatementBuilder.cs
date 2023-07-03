@@ -1,4 +1,4 @@
-﻿namespace Katas.BankChicago.Tests;
+﻿namespace Katas.BankChicago.Tests.Infrastructure;
 
 class StatementBuilder
 {

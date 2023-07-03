@@ -2,8 +2,8 @@ namespace Katas.BankChicago;
 
 class BankAccountEndpoint
 {
-    readonly IClock _clock;
     readonly Account _account;
+    readonly IClock _clock;
 
     public BankAccountEndpoint(IClock clock, Account account)
     {
