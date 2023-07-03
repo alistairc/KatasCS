@@ -2,10 +2,10 @@
 
 class StatementAfterTransactionsUserJourney
 {
-    [Test, Explicit("User journey not complete yet")]
+    [Test]
     public void VerifyStatementAfterDepositAndWithdrawal()
     {
-        var testSystem = new TestSystem()
+        var testSystem = new AccountEndpointTestSystem()
             .SetDate(new DateOnly(2022, 06, 29))
             .Deposit(1000)
             .SetDate(new DateOnly(2022, 06, 30))
@@ -20,35 +20,38 @@ class StatementAfterTransactionsUserJourney
         statement[4].ShouldBe("Closing Balance: 950.50");
     }
 
-    class TestSystem
+    class AccountEndpointTestSystem
     {
         readonly Account _account = new();
         DateOnly _systemDate = DateOnly.MinValue;
-        
-        public TestSystem SetDate(DateOnly systemDate)
+
+        public AccountEndpointTestSystem SetDate(DateOnly systemDate)
         {
             _systemDate = systemDate;
             return this;
         }
-        
-        public TestSystem Deposit(decimal amount)
+
+        public AccountEndpointTestSystem Deposit(decimal amount)
         {
-            //TODO: logic in test code
-            _account.MakeTransaction(new Transaction(_systemDate, "Deposit", amount));
+            GetBankAccountEndpoint().Deposit(amount);
             return this;
         }
 
-        public TestSystem Withdraw(decimal amount)
+        public AccountEndpointTestSystem Withdraw(decimal amount)
         {
-            //TODO: logic in test code
-            _account.MakeTransaction(new Transaction(_systemDate, "Withdrawal", -amount));
+            GetBankAccountEndpoint().Withdraw(amount);
             return this;
         }
 
         public IReadOnlyList<string> GetStatementText()
         {
-            //TODO: logic in test code
-            return TextStatementFormat.Format(_account.GetStatement());
+            return GetBankAccountEndpoint().GetTextStatement();
+        }
+        
+        BankAccountEndpoint GetBankAccountEndpoint()
+        {
+            var endpoint = new BankAccountEndpoint(new FixedClock(_systemDate), _account);
+            return endpoint;
         }
     }
 }
