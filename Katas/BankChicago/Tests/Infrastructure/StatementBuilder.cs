@@ -12,7 +12,7 @@ class StatementBuilder
 
     public Statement Build()
     {
-        var account = new Account();
+        var account = new Account(new InMemoryTransactionRepository());
         foreach (var transaction in _transactions)
         {
             account.MakeTransaction(transaction);

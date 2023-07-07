@@ -1,17 +1,21 @@
 ﻿namespace Katas.BankChicago;
 
-//TODO: shouldn't be public
-public class Account
+class Account
 {
-    readonly List<Transaction> _transactions = new();
+    readonly ITransactionRepository _transactionRepository;
+
+    public Account(ITransactionRepository transactionRepository)
+    {
+        _transactionRepository = transactionRepository;
+    }
 
     public void MakeTransaction(Transaction transaction)
     {
-        _transactions.Add(transaction);
+        _transactionRepository.Add(transaction);
     }
 
     public Statement GetStatement()
     {
-        return Statement.BuildFromTransactions(_transactions);
+        return Statement.BuildFromTransactions(_transactionRepository.GetTransactions());
     }
 }

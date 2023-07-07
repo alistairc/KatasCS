@@ -1,7 +1,6 @@
 namespace Katas.BankChicago;
 
-//TODO: Shouldn't be public
-public class Statement
+class Statement
 {
     readonly IReadOnlyList<StatementLine> _statementLines;
 

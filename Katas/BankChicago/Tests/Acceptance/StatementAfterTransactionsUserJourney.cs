@@ -24,8 +24,7 @@ class StatementAfterTransactionsUserJourney
 
     class AccountEndpointTestSystem
     {
-        //TODO: Account is inside the domain, we shouldn't access it here
-        readonly Account _account = new();
+        readonly InMemoryTransactionRepository _transactionRepository = new();
         DateOnly _systemDate = DateOnly.MinValue;
 
         public AccountEndpointTestSystem SetDate(DateOnly systemDate)
@@ -53,8 +52,9 @@ class StatementAfterTransactionsUserJourney
 
         BankAccountEndpoint GetBankAccountEndpoint()
         {
-            var endpoint = new BankAccountEndpoint(new FixedClock(_systemDate), _account);
-            return endpoint;
+            return new BankAccountEndpoint(
+                new FixedClock(_systemDate), _transactionRepository
+            );
         }
     }
 }

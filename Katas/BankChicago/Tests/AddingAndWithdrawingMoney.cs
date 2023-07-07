@@ -10,7 +10,7 @@ public class AddingAndWithdrawingMoney
         const decimal amountDeposited = 123.45m;
         var depositDate = new DateOnly(2022, 12, 13);
         
-        var account = new Account();
+        var account = new Account(new InMemoryTransactionRepository());
         var endpoint = new BankAccountEndpoint(new FixedClock(depositDate), account);
         endpoint.Deposit(amountDeposited);
         
@@ -25,7 +25,7 @@ public class AddingAndWithdrawingMoney
         const decimal amountWithdrawn = 123.45m;
         var withdrawalDate = new DateOnly(2022, 12, 13);
         
-        var account = new Account();
+        var account = new Account(new InMemoryTransactionRepository());
         var endpoint = new BankAccountEndpoint(new FixedClock(withdrawalDate), account);
         endpoint.Withdraw(amountWithdrawn);
         
