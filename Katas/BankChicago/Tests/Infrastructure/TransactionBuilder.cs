@@ -1,6 +1,6 @@
 ﻿namespace Katas.BankChicago.Tests.Infrastructure;
 
-public class TransactionBuilder
+class TransactionBuilder
 {
     public DateOnly Date { get; init; } = new(2020, 12, 31);
     public decimal Amount { get; init; } = 123.45m;

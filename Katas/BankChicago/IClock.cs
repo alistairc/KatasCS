@@ -1,6 +1,6 @@
 namespace Katas.BankChicago;
 
-interface IClock
+public interface IClock
 {
     DateOnly GetDate();
 }

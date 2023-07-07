@@ -24,6 +24,7 @@ class StatementAfterTransactionsUserJourney
 
     class AccountEndpointTestSystem
     {
+        //TODO: Account is inside the domain, we shouldn't access it here
         readonly Account _account = new();
         DateOnly _systemDate = DateOnly.MinValue;
 

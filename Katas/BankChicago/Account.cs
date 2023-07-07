@@ -1,5 +1,6 @@
 ﻿namespace Katas.BankChicago;
 
+//TODO: shouldn't be public
 public class Account
 {
     readonly List<Transaction> _transactions = new();
