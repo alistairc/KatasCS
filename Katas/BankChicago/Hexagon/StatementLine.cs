@@ -1,4 +1,4 @@
-namespace Katas.BankChicago;
+namespace Katas.BankChicago.Hexagon;
 
 record StatementLine(DateOnly Date, string Description, decimal Amount, decimal Balance)
 {

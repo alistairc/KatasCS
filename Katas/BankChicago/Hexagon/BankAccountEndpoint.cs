@@ -1,14 +1,13 @@
-namespace Katas.BankChicago;
+using Katas.BankChicago.Schema;
 
-public class BankAccountEndpoint
+namespace Katas.BankChicago.Hexagon;
+
+class BankAccountEndpoint : IBankAccountEndpoint
 {
     readonly Account _account;
     readonly IClock _clock;
 
-    public BankAccountEndpoint(IClock clock, ITransactionRepository transactionRepository) : this(clock, new Account(transactionRepository))
-    { }
-
-    internal BankAccountEndpoint(IClock clock, Account account)
+    public BankAccountEndpoint(IClock clock, Account account)
     {
         _clock = clock;
         _account = account;

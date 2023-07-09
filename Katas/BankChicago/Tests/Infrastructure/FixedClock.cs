@@ -1,3 +1,5 @@
+using Katas.BankChicago.Hexagon;
+
 namespace Katas.BankChicago.Tests.Infrastructure;
 
 class FixedClock : IClock

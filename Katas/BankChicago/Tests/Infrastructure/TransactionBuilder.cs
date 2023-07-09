@@ -1,4 +1,6 @@
-﻿namespace Katas.BankChicago.Tests.Infrastructure;
+﻿using Katas.BankChicago.Hexagon;
+
+namespace Katas.BankChicago.Tests.Infrastructure;
 
 class TransactionBuilder
 {

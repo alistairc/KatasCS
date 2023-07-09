@@ -21,40 +21,4 @@ class StatementAfterTransactionsUserJourney
         statement[3].ShouldBe("");
         statement[4].ShouldBe("Closing Balance: 950.50");
     }
-
-    class AccountEndpointTestSystem
-    {
-        readonly InMemoryTransactionRepository _transactionRepository = new();
-        DateOnly _systemDate = DateOnly.MinValue;
-
-        public AccountEndpointTestSystem SetDate(DateOnly systemDate)
-        {
-            _systemDate = systemDate;
-            return this;
-        }
-
-        public AccountEndpointTestSystem Deposit(decimal amount)
-        {
-            GetBankAccountEndpoint().Deposit(amount);
-            return this;
-        }
-
-        public AccountEndpointTestSystem Withdraw(decimal amount)
-        {
-            GetBankAccountEndpoint().Withdraw(amount);
-            return this;
-        }
-
-        public IReadOnlyList<string> GetStatementText()
-        {
-            return GetBankAccountEndpoint().GetTextStatement();
-        }
-
-        BankAccountEndpoint GetBankAccountEndpoint()
-        {
-            return new BankAccountEndpoint(
-                new FixedClock(_systemDate), _transactionRepository
-            );
-        }
-    }
 }

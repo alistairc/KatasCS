@@ -1,4 +1,7 @@
-﻿namespace Katas.BankChicago.Tests.Infrastructure;
+﻿using Katas.BankChicago.Hexagon;
+using Katas.BankChicago.Infrastructure;
+
+namespace Katas.BankChicago.Tests.Infrastructure;
 
 class StatementBuilder
 {
