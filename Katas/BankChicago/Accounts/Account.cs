@@ -1,4 +1,6 @@
-﻿namespace Katas.BankChicago.Hexagon;
+﻿using Katas.BankChicago.Accounts.Statements;
+
+namespace Katas.BankChicago.Accounts;
 
 class Account
 {

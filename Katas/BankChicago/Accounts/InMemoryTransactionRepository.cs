@@ -1,6 +1,4 @@
-using Katas.BankChicago.Hexagon;
-
-namespace Katas.BankChicago.Infrastructure;
+namespace Katas.BankChicago.Accounts;
 
 class InMemoryTransactionRepository : ITransactionRepository
 {

@@ -1,4 +1,4 @@
-﻿using Katas.BankChicago.Hexagon;
+﻿using Katas.BankChicago.Accounts;
 
 namespace Katas.BankChicago.Tests.Infrastructure;
 

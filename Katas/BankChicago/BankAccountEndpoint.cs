@@ -1,6 +1,7 @@
-using Katas.BankChicago.Schema;
+using Katas.BankChicago.Accounts;
+using Katas.BankChicago.Accounts.Statements;
 
-namespace Katas.BankChicago.Hexagon;
+namespace Katas.BankChicago;
 
 class BankAccountEndpoint : IBankAccountEndpoint
 {

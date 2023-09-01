@@ -1,6 +1,4 @@
-using Katas.BankChicago.Hexagon;
-using Katas.BankChicago.Infrastructure;
-using Katas.BankChicago.Schema;
+using Katas.BankChicago.Accounts;
 
 namespace Katas.BankChicago.Tests.Infrastructure;
 

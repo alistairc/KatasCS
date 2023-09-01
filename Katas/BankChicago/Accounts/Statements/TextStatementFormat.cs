@@ -1,4 +1,4 @@
-﻿namespace Katas.BankChicago.Hexagon;
+﻿namespace Katas.BankChicago.Accounts.Statements;
 
 static class TextStatementFormat
 {

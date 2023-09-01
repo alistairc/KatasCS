@@ -1,4 +1,4 @@
-namespace Katas.BankChicago.Hexagon;
+namespace Katas.BankChicago;
 
 public interface IClock
 {

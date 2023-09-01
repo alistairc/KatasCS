@@ -1,10 +1,9 @@
-﻿using Katas.BankChicago.Hexagon;
-using Katas.BankChicago.Infrastructure;
+﻿using Katas.BankChicago.Accounts;
 using Katas.BankChicago.Tests.Infrastructure;
 
 namespace Katas.BankChicago.Tests;
 
-public class AddingAndWithdrawingMoney
+class AddingAndWithdrawingMoney
 {
     [Test]
     public void Deposit_ShouldAddMoneyToTheAccount()

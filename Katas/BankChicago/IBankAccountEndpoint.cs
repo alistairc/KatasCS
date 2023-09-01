@@ -1,4 +1,4 @@
-namespace Katas.BankChicago.Schema;
+namespace Katas.BankChicago;
 
 public interface IBankAccountEndpoint
 {
