@@ -2,23 +2,25 @@
 
 class BankTestSystem
 {
-    public BankTestSystem Deposit(TimestampedAmount timestampedAmount)
+    readonly Deposit? _deposit;
+
+    public BankTestSystem()
     {
-        return this;
     }
 
-    public BankTestSystem Withdraw(TimestampedAmount timestampedAmount)
+    BankTestSystem(Deposit deposit)
     {
-        return this;
+        _deposit = deposit;
+    }
+
+    public BankTestSystem Deposit(Deposit deposit)
+    {
+        return new BankTestSystem(deposit);
     }
 
     public string GetStatementText()
     {
-        return  """
-                Date       || Amount || Balance
-                14/01/2012 || -500   || 2500
-                13/01/2012 || 2000   || 3000
-                10/01/2012 || 1000   || 1000
-                """;
+        var statement = new Statement(_deposit);
+        return statement.FormatAsText();
     }
 }
