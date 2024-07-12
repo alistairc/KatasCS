@@ -2,25 +2,25 @@
 
 class BankTestSystem
 {
-    readonly Deposit? _deposit;
+    readonly Account _account;
 
     public BankTestSystem()
     {
+        _account = new Account(null);
     }
 
-    BankTestSystem(Deposit deposit)
+    BankTestSystem(Account account)
     {
-        _deposit = deposit;
+        _account = account;
     }
 
     public BankTestSystem Deposit(Deposit deposit)
     {
-        return new BankTestSystem(deposit);
+        return new BankTestSystem(new Account(deposit));
     }
 
     public string GetStatementText()
     {
-        var statement = new Statement(_deposit);
-        return statement.FormatAsText();
+        return _account.GetStatement().FormatAsText();
     }
 }
