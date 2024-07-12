@@ -20,8 +20,4 @@
     <PackageReference Include="Shouldly" Version="4.2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BankFakeIt\" />
-  </ItemGroup>
-
 </Project>
