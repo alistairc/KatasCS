@@ -1,0 +1,4 @@
+﻿- different Letters for different Entity Types
+- support multiple directions
+- don't let Ants walk off the world
+- Do we really want to allow multiple entities on the same location?
