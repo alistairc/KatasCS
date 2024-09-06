@@ -4,7 +4,6 @@ public class World : IDiscreteStepWorld
 {
     readonly int _width;
     readonly int _height;
-    int _counter;
 
     readonly List<(IWorldEntity entity, WorldCoordinate location)> _entityLocations = new(); 
     
@@ -14,14 +13,8 @@ public class World : IDiscreteStepWorld
         _height = height;
     }
 
-    public int GetState()
-    {
-        return _counter;
-    }
-
     public void Step()
     {
-        _counter++;
     }
 
     public IReadOnlyList<EntityType> EntitiesAt(WorldCoordinate coordinate)
