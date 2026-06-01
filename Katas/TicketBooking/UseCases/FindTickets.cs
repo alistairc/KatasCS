@@ -1,9 +1,10 @@
 namespace Katas.TicketBooking.UseCases;
 
-public class FindTickets
+public class FindTickets(ITicketStore dataStore)
 {
     public async Task<FindTicketsResult> Execute()
     {
-        return new FindTicketsResult();
+        var shows = await dataStore.GetAllShows();
+        return new FindTicketsResult(shows);
     }
 }
