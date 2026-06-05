@@ -1,6 +1,6 @@
 using Katas.TicketBooking.UseCases;
 
-namespace Katas.TicketBooking;
+namespace Katas.TicketBooking.Tests;
 
 public class FindingAvailableTicketsTests
 {
@@ -38,22 +38,5 @@ public class FindingAvailableTicketsTests
             .ShouldBeEquivalentTo(new[] {"Macbeth", "Romeo and Juliet"});
         
         //TODO: no availability count yet
-    }
-}
-
-public class InMemoryTicketStore : ITicketStore
-{
-    readonly List<(string name, DateTimeOffset at, int available)> _performances = [];
-    
-    public void AddPerformance(string name, DateTimeOffset at, int available)
-    {
-        _performances.Add((name,at,available));
-    }
-
-    public async Task<IReadOnlyCollection<Show>> GetAllShows()
-    {
-        return _performances.GroupBy(p => p.name).Select(
-            g => new Show(g.Key)
-        ).ToList();
     }
 }

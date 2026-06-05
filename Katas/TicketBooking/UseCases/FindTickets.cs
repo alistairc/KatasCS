@@ -1,3 +1,5 @@
+using Katas.TicketBooking.Domain;
+
 namespace Katas.TicketBooking.UseCases;
 
 public class FindTickets(ITicketStore dataStore)

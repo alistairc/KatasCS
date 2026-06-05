@@ -1,4 +1,4 @@
-namespace Katas.TicketBooking.UseCases;
+namespace Katas.TicketBooking.Domain;
 
 public interface ITicketStore
 {
